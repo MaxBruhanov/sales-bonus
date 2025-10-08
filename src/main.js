@@ -94,7 +94,7 @@ function analyzeSalesData(data, options) {
     // Увеличить количество продаж
     seller.sales_count += 1;
     // Увеличить общую сумму всех продаж
-
+    seller.revenue += record.total_amount;
     // Расчёт прибыли для каждого товара
     record.items.forEach((item) => {
       const product = productIndex[item.sku]; // Товар
@@ -105,7 +105,6 @@ function analyzeSalesData(data, options) {
       // Посчитать прибыль: выручка минус себестоимость
       const profit = revenue - cost;
       // Увеличить общую накопленную прибыль (profit) у продавца
-      seller.revenue += revenue;
       seller.profit += profit;
       // Учёт количества проданных товаров
       if (!seller.products_sold[item.sku]) {
@@ -130,7 +129,7 @@ function analyzeSalesData(data, options) {
 return sellerStats.map(seller => ({
         seller_id: seller.id,// Строка, идентификатор продавца
         name: seller.name,// Строка, имя продавца
-        revenue: +seller.revenue.toFixed(0),// Число с двумя знаками после точки, выручка продавца
+        revenue: +seller.revenue.toFixed(2),// Число с двумя знаками после точки, выручка продавца
         profit: +seller.profit.toFixed(2),// Число с двумя знаками после точки, прибыль продавца.
         sales_count: seller.sales_count,// Целое число, количество продаж продавца
         top_products: seller.top_products,// Массив объектов вида: { "sku": "SKU_008","quantity": 10}, топ-10 товаров продавца
