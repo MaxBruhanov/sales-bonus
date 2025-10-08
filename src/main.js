@@ -54,11 +54,11 @@ function analyzeSalesData(data, options) {
     throw new Error('Некорректные входные данные');
   }
   // @TODO: Проверка наличия опций
-  const { calculateRevenue, calculateBonus } = options;
-
   if (typeof options !== 'object') {
     throw new Error('Опции не являются объектом');
   }
+
+  const { calculateRevenue, calculateBonus } = options;
 
   if (
     typeof calculateRevenue !== 'function' ||
